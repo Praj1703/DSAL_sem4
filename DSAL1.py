@@ -108,3 +108,38 @@ for i in set1:
         issubset_set = False
         break
 print(issubset_set)
+
+
+
+
+
+
+####OUTPUT#############
+# Set1 = 
+# {1, 2, 3, 4, 5, 6, 7}
+# Set2 = 
+# {6, 11, 12, 13, 14, 15}
+# Union of the two sets 
+# {1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15}
+# Insertion of two sets
+# {6}
+# Diffrence of two sets :
+# {1, 2, 3, 4, 5, 7}
+# Sym diff of two sets :
+# {1, 2, 3, 4, 5, 7, 11, 12, 13, 14, 15}
+# Issubset ? 
+# False
+# (in) and ( not in ) in the sets 
+# True
+# False
+# Operations using iterators
+# Union of two sets using itrators : 
+# {1, 2, 3, 4, 5, 6, 7, 11, 12, 13, 14, 15}
+# Intersection of two sets using itrators : 
+# {6}
+# Difference of two sets using itrators : 
+# {1, 2, 3, 4, 5, 7}
+# Symmetric Differnce of two sets using itrators : 
+# {1, 2, 3, 4, 5, 7, 11, 12, 13, 14, 15}
+# Issubset of two sets using itrators : 
+# False
