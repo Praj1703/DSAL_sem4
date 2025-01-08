@@ -32,16 +32,17 @@
 
 
 
+# Initialize the set
 set1 = set()
 
-
+# Input size and elements for the set
 size = int(input("Enter the number of elements: "))
 for i in range(size):
-    el = input("Enter the Element: ")
+    el = int(input("Enter the Element: "))  # Convert the element to an integer
     set1.add(el)
 
 while True:
-
+    # Menu options
     print("\n***********Menu*************")
     print("x--------------------------x")
     print("|1. Add Element            |")
@@ -59,12 +60,12 @@ while True:
     choice = int(input("Enter Your Choice: "))
     
     if choice == 1:
-        addEl = input("Enter number to add: ")
+        addEl = int(input("Enter number to add: "))  # Convert to integer
         set1.add(addEl)
         print(f"Updated Set: {set1}\n")
     
     elif choice == 2:
-        removeEl = input("Enter the number to delete from set: ")
+        removeEl = int(input("Enter the number to delete from set: "))  # Convert to integer
         if removeEl in set1:
             set1.remove(removeEl)
             print(f"Updated Set: {set1}\n")
@@ -72,7 +73,7 @@ while True:
             print(f"Element {removeEl} not found in the set.\n")
     
     elif choice == 3:
-        element = input("Enter the element to check: ")
+        element = int(input("Enter the element to check: "))  # Convert to integer
         if element in set1:
             print(f"Element {element} is present in the set.\n")
         else:
@@ -82,22 +83,22 @@ while True:
         print(f"The size of the set is: {len(set1)}\n")
     
     elif choice == 5:
-        
-        set2 = set(input("Enter the second set (comma-separated): ").split(","))
+        # For intersection, we need another set
+        set2 = set(map(int, input("Enter the second set (comma-separated): ").split(",")))  # Convert input to integers
         print(f"Intersection: {set1 & set2}\n")
     
     elif choice == 6:
-       
-        set2 = set(input("Enter the second set (comma-separated): ").split(","))
+        # For union, we need another set
+        set2 = set(map(int, input("Enter the second set (comma-separated): ").split(",")))  # Convert input to integers
         print(f"Union: {set1 | set2}\n")
     
     elif choice == 7:
-        
-        set2 = set(input("Enter the second set (comma-separated): ").split(","))
+        # For difference, we need another set
+        set2 = set(map(int, input("Enter the second set (comma-separated): ").split(",")))  # Convert input to integers
         print(f"Difference: {set1 - set2}\n")
     
     elif choice == 8:
-        set2 = set(input("Enter the set to check as subset (comma-separated): ").split(","))
+        set2 = set(map(int, input("Enter the set to check as subset (comma-separated): ").split(",")))  # Convert input to integers
         if set2.issubset(set1):
             print(f"{set2} is a subset of {set1}\n")
         else:
