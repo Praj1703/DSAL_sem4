@@ -1,73 +1,106 @@
 #include <iostream>
-#include <cstring> // For strcpy
+#include <string>
+
 using namespace std;
 
-// Node structure representing a part of the book
-struct TreeNode {
-    char value[50];      // Node value (e.g., "Chapter 1", "Section 1.1")
-    TreeNode* child;     // Pointer to the first child
-    TreeNode* sibling;   // Pointer to the next sibling
-
-    TreeNode(const char* val) {
-        strcpy(value, val);
-        child = nullptr;
-        sibling = nullptr;
+struct Node { 
+    string label;
+    int ch_count;
+    Node* child[10]; 
+    Node() : ch_count(0) { 
+        for (int i = 0; i < 10; i++) {
+            child[i] = nullptr; 
+        }
     }
 };
 
-// Function to add a child node
-TreeNode* addChild(TreeNode* parent, const char* childValue) {
-    TreeNode* newChild = new TreeNode(childValue);
-    if (parent->child == nullptr) {
-        parent->child = newChild;
-    } else {
-        TreeNode* temp = parent->child;
-        while (temp->sibling != nullptr) {
-            temp = temp->sibling;
+class GT { 
+public:
+    Node* root;
+
+    GT() { 
+        root = nullptr;
+    }
+
+    void create_tree();
+    void display(Node* r1);
+};
+
+void GT::create_tree() {
+    int tchapters;
+
+    root = new Node; 
+    cout << "Enter name of book: ";
+    cin.ignore(); 
+    getline(cin, root->label);
+    
+    cout << "Enter number of chapters in book: ";
+    cin >> tchapters;
+    root->ch_count = tchapters;
+
+    for (int i = 0; i < tchapters; i++) {
+        root->child[i] = new Node; 
+        cout << "Enter the name of Chapter " << (i + 1) << ": ";
+        cin.ignore(); 
+        getline(cin, root->child[i]->label);
+        
+        cout << "Enter number of sections in Chapter " << (i + 1) << ": ";
+        cin >> root->child[i]->ch_count;
+
+        for (int j = 0; j < root->child[i]->ch_count; j++) {
+            root->child[i]->child[j] = new Node; 
+            cout << "Enter name of Section " << (j + 1) << ": ";
+            cin.ignore(); 
+            getline(cin, root->child[i]->child[j]->label);
         }
-        temp->sibling = newChild;
     }
-    return newChild;
 }
 
-// Function to print the tree recursively
-void printTree(TreeNode* node, int level = 0) {
-    if (!node) return;
+void GT::display(Node* r1) {
+    if (r1 == nullptr) return;
 
-    // Print the current node with indentation based on the level
-    for (int i = 0; i < level; i++) {
-        cout << "  ";
+    cout << "Book: " << r1->label << endl;
+    for (int i = 0; i < r1->ch_count; i++) {
+        cout << "  Chapter " << (i + 1) << ": " << r1->child[i]->label << endl;
+        for (int j = 0; j < r1->child[i]->ch_count; j++) {
+            cout << "    Section " << (j + 1) << ": " << r1->child[i]->child[j]->label << endl;
+        }
     }
-    cout << node->value << endl;
-
-    // Recursively print the child and sibling nodes
-    printTree(node->child, level + 1);
-    printTree(node->sibling, level);
 }
 
-// Main function
 int main() {
-    // Create the root node (Book)
-    TreeNode* root = new TreeNode("Book");
+    GT gt;
+    int choice;
 
-    // Add chapters to the book
-    TreeNode* chapter1 = addChild(root, "Chapter 1");
-    TreeNode* chapter2 = addChild(root, "Chapter 2");
-
-    // Add sections to Chapter 1
-    TreeNode* section1_1 = addChild(chapter1, "Section 1.1");
-    TreeNode* section1_2 = addChild(chapter1, "Section 1.2");
-
-    // Add subsections to Section 1.1
-    addChild(section1_1, "Subsection 1.1.1");
-    addChild(section1_1, "Subsection 1.1.2");
-
-    // Print the tree
-    cout << "Book Structure:" << endl;
-    printTree(root);
-
-    // Cleanup dynamically allocated memory
-    // Note: Proper deletion of all nodes is omitted for simplicity
+    while (true) {
+        cout<<"x----------------------x"<<endl;
+		cout<<"|  BOOK TREE CREATION  |"<<endl;
+		cout<<"x----------------------x\n"<<endl;
+		cout<<"   1. Insert"<<endl;
+		cout<<"   2. Display"<<endl;
+		cout<<"   3. Exit"<<endl;
+		cout<<"Enter Your Choice : ";
+        cin >> choice;
+		cout<<"*************************"<<endl;
+        switch (choice) {
+            case 1:
+                gt.create_tree();
+                cout<<"*************************"<<endl;
+                break;
+            case 2:
+                gt.display(gt.root);
+                cout<<"*************************"<<endl;
+                
+                break;
+            case 3:
+                cout << "Thanks for using this program!" << endl;
+                cout<<"*************************"<<endl;
+                return 0;
+            default:
+                cout << "Wrong choice!!!" << endl;
+                cout<<"*************************"<<endl;
+        }
+    }
 
     return 0;
 }
